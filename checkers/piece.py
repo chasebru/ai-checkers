@@ -27,6 +27,11 @@ class Piece:
     def make_king(self):
         self.king = True
 
+    def move(self, row, col):
+        self.row = row
+        self.col = col
+        self.calc_pos()
+
     def draw(self, screen):
         radius = SQUARE_SIZE//2 - self.PADDING
         pygame.draw.circle(screen, GREY, (self.x, self.y), radius + self.OUTLINE)
