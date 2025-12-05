@@ -23,6 +23,9 @@ class Game:
     def reset(self):
         self._init()
 
+    def winner(self):
+        return self.board.winner()
+
     def select(self, row, col):
         if self.selected:
             result = self._move(row, col)
