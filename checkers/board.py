@@ -1,4 +1,3 @@
-from telnetlib import SUPDUP
 
 import pygame
 from .constants import BLACK, RED, ROWS, SQUARE_SIZE, WHITE, COLS
