@@ -46,6 +46,13 @@ class Game:
             pygame.draw.circle(self.screen, BLUE, (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2), 10)
 
 
+    def get_board(self):
+        return self.board
+    
+    def ai_move(self, board):
+        self.board = board
+        self.change_turn()
+
 
     def _move(self, row, col):
         piece = self.board.get_piece(row, col)
