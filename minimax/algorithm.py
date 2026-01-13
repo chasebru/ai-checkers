@@ -2,7 +2,7 @@ from copy import deepcopy
 import pygame
 from checkers.constants import RED, WHITE
 
-def minimax(position, depth, max_player:bool, game, draw=True, alpha=float('-inf'), beta=float('+inf')):
+def minimax(position, depth, max_player:bool, game, draw, alpha=float('-inf'), beta=float('+inf')):
     if depth == 0 or position.winner() is not None:
         return position.evaluate(), position
     
@@ -10,7 +10,7 @@ def minimax(position, depth, max_player:bool, game, draw=True, alpha=float('-inf
         value= float('-inf')
         best_move = None
         for move in get_all_moves(position, WHITE, game, draw):
-            tmp, _ = minimax(move, depth-1, False, game)
+            tmp, _ = minimax(move, depth-1, False, game, draw)
             if tmp >  value:
                 best_move = move
                 value = tmp
@@ -22,7 +22,7 @@ def minimax(position, depth, max_player:bool, game, draw=True, alpha=float('-inf
         value= float('+inf')
         best_move = None
         for move in get_all_moves(position, RED, game, draw):
-            tmp, _ = minimax(move, depth-1, True, game)
+            tmp, _ = minimax(move, depth-1, True, game, draw)
             if tmp < value:
                 best_move = move
                 value = tmp
@@ -41,10 +41,10 @@ def simulate_move(piece, move, board, game, skip):
 def get_all_moves(board, color, game, draw):
     moves = []  
     for piece in board.get_all_pieces(color):
-        if draw:
-            valid_moves = board.get_valid_moves(piece)
+        valid_moves = board.get_valid_moves(piece)
         for move, skip in valid_moves.items():
-            draw_moves(game, board, piece)
+            if draw:
+                draw_moves(game, board, piece)
             temp_board = deepcopy(board)
             temp_piece = temp_board.get_piece(piece.row, piece.col)
             new_board = simulate_move(temp_piece, move, temp_board, game, skip)
