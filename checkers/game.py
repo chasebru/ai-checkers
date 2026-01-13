@@ -13,7 +13,6 @@ class Game:
         self.draw_valid_moves(self.valid_moves)
         pygame.display.update()
 
-
     def _init(self):
         self.selected = None
         self.board = Board()
@@ -43,16 +42,22 @@ class Game:
     def draw_valid_moves(self, moves):
         for move in moves:
             row, col = move
-            pygame.draw.circle(self.screen, BLUE, (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2), 10)
-
+            pygame.draw.circle(
+                self.screen,
+                BLUE,
+                (
+                    col * SQUARE_SIZE + SQUARE_SIZE // 2,
+                    row * SQUARE_SIZE + SQUARE_SIZE // 2,
+                ),
+                10,
+            )
 
     def get_board(self):
         return self.board
-    
+
     def ai_move(self, board):
         self.board = board
         self.change_turn()
-
 
     def _move(self, row, col):
         piece = self.board.get_piece(row, col)
@@ -72,5 +77,3 @@ class Game:
             self.turn = WHITE
         else:
             self.turn = RED
-
-
