@@ -25,7 +25,7 @@ def main():
         clock.tick(FPS)
         
         if game.turn == WHITE:
-          value,  new_board = minimax(game.get_board(), 5, True, game)
+          value,  new_board = minimax(game.get_board(), 3, True, game, False)
           game.ai_move(new_board)
         
         if game.winner() is not None:
